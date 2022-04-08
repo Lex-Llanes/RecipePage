@@ -1,24 +1,40 @@
 import { React, useState, useEffect } from 'react'
 
 const Users = () => {
-    const [userId, setId] = useState("")
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [userName, setUsername] = useState("");
     const [userEmail, setEmail] = useState("");
 
 
-    const handleUserSubmit = (event) => {
-      event.preventDafault()
+    const handleUserSubmit = async (event) => {
+      event.preventDefault()
+      try {
+        const body = { firstName, lastName, userName, userEmail }
+        const response = await fetch("http://localhost:8080/user", 
+          {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(body)
+          }
+        )
+        console.log(response)
+      } catch (error) {
+        console.error(error.message)
+      }
     }
 
-
+    console.log(firstName)
+    console.log(lastName)
+    console.log(userName)
+    console.log(userEmail)
 
 
   return (
     <div>
 
         {/* ADDING NEW USER */}
-        <form className="userForm" onSubmit={handleUserSubmit}>
+        <form onSubmit={handleUserSubmit}>
 
             <input 
                 type="text"
@@ -39,7 +55,16 @@ const Users = () => {
             <br/>
 
             <input 
-              type="email"
+              type="text"
+              placeholder="Username..."
+              value={userName}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+            <br/>
+            <br/>
+
+            <input 
+              type="text"
               placeholder="Email..."
               value={userEmail}
               onChange={(event) => setEmail(event.target.value)}
