@@ -15,14 +15,58 @@ app.get('/', (req, res) => {
 });
 
 
+//FIND USER
+// app.get('/users', async (req, res) => {
+//     try {
+//         const user = db.query("SELECT * FROM users WHERE username || '' || ")
+//     } catch (error) {
+        
+//     }
+// })
+
+
 //GET ALL USERS
+app.get('/user', async (req, res) => {
+    try {
+        const allUsers = await db.query('SELECT * FROM users');
+
+        res.json(allUsers.rows)
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+
 
 
 //POST NEW USER
+app.post('/user', async (req, res) => {
+    try {
+        const { firstName } = req.body;
+        const { lastName } = req.body;
+        const { userName } = req.body;
+        const { userEmail } = req.body;
 
+        const newUser = await db.query (
+            'INSERT INTO users(user_first, user_last, user_email, username) VALUES($1, $2, $3, $4) RETURNING *', [firstName, lastName, userEmail, userName])
+        res.json(newUser.rows[0])
+    } catch (error) {
+        console.error(error.message)
+    }
+})
 
 //SEARCH FOR A USER
+app.get('/users', async (req, res) => {
+    try {
+        const { userName } = req.query;
 
+        const user = await db.query("SELECT * FROM users WHERE username ILIKE $1", [`%${userName}%`]);
+
+        res.json(user.rows)
+    } catch (error) {
+        console.error(error.message)
+    }
+})
 
 
 
@@ -31,21 +75,24 @@ app.get('/', (req, res) => {
 
 
 //POST NEW BLOG
+app.post('/blog', async (req, res) => {
+    try {
+        //{ userName, text, recipe, date, foreignKey }
+        const { text } = req.body;
+        const { recipe } = req.body;
+        const { date } = req.body;
+        const { foreignKey} = req.body;
 
+        const newBlogPost = await db.query('INSERT INTO recipes(blog_text, blog_recipe, blog_date, users_id) VALUES($1, $2, $3, $4) RETURNING *', [text, recipe, date, foreignKey])
+        res.json(newBlogPost.rows[0])
 
-
-
-
-app.get('/api/students', cors(), async (req, res) => {
-    try{
-        const { rows: students } = await db.query('SELECT * FROM students');
-        res.send(students);
-    } catch (e){
-        return res.status(400).json({e});
+    } catch (error) {
+        console.error(error.message)
     }
-});
+})
 
-//create the POST request
+
+
 
 
 // console.log that your server is up and running
