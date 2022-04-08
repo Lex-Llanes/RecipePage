@@ -4,7 +4,7 @@ import { BrowserRouter as Routes, Route, Switch } from 'react-router-dom'
 import Navigation from './components/navbar';
 import Users from './components/users';
 import Blog from './components/blogform';
-
+import BlogList from './components/bloglist';
 
 function App() {
   return (
@@ -17,6 +17,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Users />
+            </Route>
+            <Route path="/bloglist">
+              <BlogList/>
             </Route>
             <Route path="/blog">
               <Blog />

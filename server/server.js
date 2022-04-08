@@ -15,16 +15,6 @@ app.get('/', (req, res) => {
 });
 
 
-//FIND USER
-// app.get('/users', async (req, res) => {
-//     try {
-//         const user = db.query("SELECT * FROM users WHERE username || '' || ")
-//     } catch (error) {
-        
-//     }
-// })
-
-
 //GET ALL USERS
 app.get('/user', async (req, res) => {
     try {
@@ -72,6 +62,15 @@ app.get('/users', async (req, res) => {
 
 
 //GET ALL BLOGS
+app.get('/blog', async (req, res) => {
+    try {
+        const allBlogs = await db.query('SELECT * FROM recipes');
+
+        res.json(allBlogs.rows);
+    } catch (error) {
+        console.error(error.message)
+    }
+})
 
 
 //POST NEW BLOG

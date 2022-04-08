@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react'
+import { Form } from 'react-bootstrap';
 
 const Users = () => {
     const [firstName, setFirstName] = useState("");
@@ -34,9 +35,10 @@ const Users = () => {
     <div>
 
         {/* ADDING NEW USER */}
-        <form onSubmit={handleUserSubmit}>
-
-            <input 
+        <Form onSubmit={handleUserSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <input
+                size="sm"
                 type="text"
                 placeholder="First name..."
                 value={firstName}
@@ -44,6 +46,7 @@ const Users = () => {
             />
             <br/>
             <br/>
+            </Form.Group>
 
             <input 
               type="text"
@@ -87,7 +90,7 @@ const Users = () => {
 
 
 
-        </form>
+        </Form>
     </div>
   )
 }
