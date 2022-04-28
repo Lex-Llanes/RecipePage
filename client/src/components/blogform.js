@@ -65,10 +65,6 @@ const Blog = (props) => {
         <br/>
 
 
-
-
-
-
         {/* FORM TO SUBMIT NEW BLOG ENTRY */}
         <form onSubmit={handleBlogSubmit}>
 
