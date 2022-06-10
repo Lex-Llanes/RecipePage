@@ -1,0 +1,11 @@
+DATABASE_URL="postgresql://lexllanes:hyol33ung@localhost/mcspotfi"
+DATABASE_SSL="false"
+
+LASTFM_API_KEY="2cff79a2339abd212c8b710b322fa20e"
+
+AUTH_API_KEY=""
+SECRET="AasdAWEazsdaewd34asdf"
+BASE_URL="http://localhost:3001"
+CLIENT_ID="GYn5eMURkelbSnPtt4qPsLnku0xD5GJc"
+CLIENT_SECRET="7r2C1QJdNF_jifKayEJWZWHdLJupZRT7kIZJTZJ2vERwBa9tmnMlm14aeYhotR_6"
+ISSUER_BASEURL="https://lex-llanes.us.auth0.com"
